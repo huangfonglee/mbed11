@@ -17,8 +17,8 @@ void xbee_rx_interrupt(void);
 void xbee_rx(void);
 void reply_messange(char *xbee_reply, char *messange);
 void check_addr(char *xbee_reply, char *messenger);
-void acc(Arguments *in, Reply *out);
-RPCFunction rpcacc(&acc, "acc");
+void readacc(Arguments *in, Reply *out);
+RPCFunction rpcacc(&readacc, "readacc");
 
 int main(){
 
@@ -122,12 +122,12 @@ void check_addr(char *xbee_reply, char *messenger){
    xbee_reply[2] = '\0';
    xbee_reply[3] = '\0';
 }
-void acc(Arguments *in, Reply *out)
+void readacc(Arguments *in, Reply *out)
 {
     int16_t pDataXYZ[3] = {0};
     char buffer[200];
     BSP_ACCELERO_AccGetXYZ(pDataXYZ);
-    sprintf(buffer, "Accelerometer values: (%d, %d, %d)", pDataXYZ[0], pDataXYZ[1], pDataXYZ[2]);
+    sprintf(buffer, "Accelerate values: (%d, %d, %d)", pDataXYZ[0], pDataXYZ[1], pDataXYZ[2]);
     out->putData(buffer);    
 
 }
